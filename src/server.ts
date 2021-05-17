@@ -115,9 +115,9 @@ const connect = async () => {
 const main = async () => {
   await fetchParamData();
   await gqlConnect();
-  // await connect();
+  await connect();
   // await testConnect(testData)
-  await testConnect()
+  // await testConnect()
 };
 
 main();
