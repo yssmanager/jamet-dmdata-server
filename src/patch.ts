@@ -17,7 +17,8 @@ import { fetchParamData, getMode } from './config';
 dotenv();
 
 const mode = getMode();
-const baseUrl = process.env.DMDATA_TELEGRAMLIST_URI || '';
+// const baseUrl = process.env.DMDATA_TELEGRAMLIST_URI || '';
+const baseUrl = 'https://api.dmdata.jp/telegram/v1/list';
 const apiKey = process.env.DMDATA_API_KEY || '';
 const getCategotyList = ['telegram.earthquake', 'telegram.weather'];
 

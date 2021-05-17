@@ -16,7 +16,8 @@ import { fetchParamData, getMode } from './config';
 dotenv();
 
 const mode = getMode();
-const baseUrl = process.env.DMDATA_SOCKET_URI || '';
+// const baseUrl = process.env.DMDATA_SOCKET_URI || '';
+const baseUrl = 'https://api.dmdata.jp/socket/v1/start';
 const apiKey = process.env.DMDATA_API_KEY || '';
 const getCategotyList = ['telegram.earthquake', 'telegram.weather'];
 
