@@ -13,45 +13,61 @@ const xmlParser = new Parser({explicitArray: false});
 const slackHookUrl = getMode({prod: process.env.SLACK_HOOKURL_OTHER, dev: process.env.SLACK_HOOKURL_DEV}) ?? '';
 const discordHookUrl = getMode({prod: process.env.DISCORD_HOOKURL_OTHER, dev: process.env.DISCORD_HOOKURL_DEV}) ?? '';
 
+export type DmdataTelegramPassingItemType = {
+  name: string;
+  time: string;
+}
+
+export type DmdataTelegramHeadType = {
+  type: string;
+  author: string;
+  target?: string;
+  time: string;
+  designation?: string | null;
+  test: boolean;
+  xml?: boolean;
+}
+
+export type DmdataTelegramXmlReportControlType = {
+  title: string;
+  dateTime: string;
+  status: string;
+  editorialOffice: string;
+  publishingOffice: string;
+}
+
+export type DmdataTelegramXmlReportHeadType = {
+  title: string;
+  reportDateTime: string;
+  targetDateTime: string;
+  targetDateTimeDubious?: string;
+  targetDuration?: string;
+  validDateTime?: string;
+  eventId: string | null;
+  serial: string | null;
+  infoType: string;
+  infoKind: string;
+  infoKindVersion: string;
+  headline: string | null;
+}
+
+export type DmdataTelegramXmlReportType = {
+  control: DmdataTelegramXmlReportControlType;
+  head: DmdataTelegramXmlReportHeadType;
+}
+
 export type DmdataTelegramType = {
   type: string;
+  version: string;
+  id: string;
   classification: string;
-  key: string;
+  passing: DmdataTelegramPassingItemType[];
+  head: DmdataTelegramHeadType;
+  xmlReport?: DmdataTelegramXmlReportType;
+  format: string | null;
+  compression: string | null;
+  encoding: string | null;
   body: string;
-  data: {
-    type: string;
-    author: string;
-    time: string;
-    test: boolean;
-    xml: boolean;
-    compression: string | null;
-    createTime: string;
-    sendNumber: number;
-  };
-  url: string;
-  xmlData?: {
-    control: {
-      title: string;
-      dateTime: string;
-      status: string;
-      editorialOffice: string;
-      publishingOffice: string;
-    };
-    head: {
-      title: string;
-      reportDateTime: string;
-      targetDateTime: string;
-      targetDateTimeDubious?: string;
-      targetDuration?: string;
-      validDateTime?: string;
-      eventId: string | null;
-      serial: string | null;
-      infoType: string;
-      infoKind: string;
-      infoKindVersion: string;
-      headline: string | null;
-    };
-  };
 };
 
 export type AddInfoType = {
@@ -94,7 +110,7 @@ export class DmdataTelegramData {
   }
 
   async init() {
-    if (this._data.data.xml) {
+    if (this._data.head.xml) {
       if (this._data.body != undefined)
       this.parseTelegram()
     }

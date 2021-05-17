@@ -162,63 +162,63 @@ export const discordParsePayload = async (
   data: DmdataTelegramType,
   addInfo?: AddInfoType
 ) => {
-  if (data.xmlData === undefined)
+  if (data.xmlReport === undefined)
     return {
-      content: `電文: ${data.data?.type}`,
+      content: `電文: ${data.head?.type}`,
     };
   const basePayload = {
     embeds: [
       {
-        title: data.xmlData?.head?.title!,
+        title: data.xmlReport?.head?.title!,
         fields: [
           {
             name: '電文ヘッダ',
-            value: data.data?.type,
+            value: data.head?.type,
             inline: true,
           },
           {
             name: '情報名',
-            value: data.xmlData?.control?.title,
+            value: data.xmlReport?.control?.title,
             inline: true,
           },
           {
             name: '運用種別',
-            value: data.xmlData?.head?.infoKind,
+            value: data.xmlReport?.head?.infoKind,
             inline: true,
           },
           {
             name: '発表形態',
-            value: data.xmlData?.head?.infoType,
+            value: data.xmlReport?.head?.infoType,
             inline: true,
           },
           {
             name: '編集官署名',
-            value: data.xmlData?.control?.editorialOffice,
+            value: data.xmlReport?.control?.editorialOffice,
             inline: true,
           },
           {
             name: '発表官署名',
-            value: data.xmlData?.control?.publishingOffice,
+            value: data.xmlReport?.control?.publishingOffice,
             inline: true,
           },
           {
             name: '発表時刻',
-            value: convTime(data.xmlData?.control?.dateTime),
+            value: convTime(data.xmlReport?.control?.dateTime),
             inline: true,
           },
           {
             name: 'EventID',
-            value: data.xmlData?.head?.eventId ?? 'なし',
+            value: data.xmlReport?.head?.eventId ?? 'なし',
             inline: true,
           },
           {
             name: 'Serial',
-            value: data.xmlData?.head?.serial ?? 'なし',
+            value: data.xmlReport?.head?.serial ?? 'なし',
             inline: true,
           },
           {
             name: '見出し',
-            value: data.xmlData?.head?.headline ?? '特記事項なし',
+            value: data.xmlReport?.head?.headline ?? '特記事項なし',
           },
         ],
       },

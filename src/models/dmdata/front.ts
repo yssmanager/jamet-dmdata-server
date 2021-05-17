@@ -4,7 +4,7 @@ import { WeatherGeneralEvent } from './models/weather/general';
 import { DmdataTelegramData, DmdataTelegramType, DmdataClassOptionType } from './telegram';
 
 const dmdataService = (data: DmdataTelegramType, option?: DmdataClassOptionType) => {
-  switch (data.data.type) {
+  switch (data.head.type) {
     // EarthQuake
     case 'VXSE51':
     case 'VXSE52':

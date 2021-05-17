@@ -25,21 +25,21 @@ export const createDmdataTelegram = async (xml: string, option?: DmdataDataOptio
 
   const dmdata: DmdataTelegramType = {
     type: 'data',
+    version: '2',
+    id: '384bithash',
     classification: option?.classification ?? 'test',
-    key: option?.key ?? 'test',
-    url: option?.url ?? 'test',
-    body: binary,
-    data: {
+    passing: [],
+    // key: option?.key ?? 'test',
+    // url: option?.url ?? 'test',
+    head: {
       type: option?.type ?? 'VAAA99',
       author: option?.author ?? 'TEST', 
       time: option?.time ?? parseObj.Report.Head.ReportDateTime,
       test: option?.test ?? true,
       xml: option?.xml ?? true,
-      compression: option?.compression ?? 'gzip',
-      createTime: option?.createTime ?? parseObj.Report.Head.ReportDateTime,
-      sendNumber: option?.sendNumber ?? 0
+
     },
-    xmlData: {
+    xmlReport: {
       control: {
         title: parseObj.Report.Control.Title,
         dateTime: parseObj.Report.Control.DateTime,
@@ -61,7 +61,11 @@ export const createDmdataTelegram = async (xml: string, option?: DmdataDataOptio
         infoKindVersion: parseObj.Report.Head.InfoKindVersion,
         headline: parseObj.Report.Head.Headline.Text,
       }
-    }
+    },
+    format: 'xml',
+    compression: option?.compression ?? 'gzip',
+    encoding: 'base64',
+    body: binary,
   }
 
   return dmdata;

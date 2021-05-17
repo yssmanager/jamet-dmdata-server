@@ -2,19 +2,19 @@ import { fixEscapeText, convTime } from './../../utils';
 import { DmdataTelegramType } from '../dmdata/telegram';
 
 export const slackParsePayload = (data: DmdataTelegramType) => {
-  if (data.xmlData === undefined)
+  if (data.xmlReport === undefined)
     return {
-      text: `電文: ${data.data.type}`,
+      text: `電文: ${data.head.type}`,
     };
   try {
     const payloadStr = `{
-      "text": "${data.xmlData.head.title}",
+      "text": "${data.xmlReport.head.title}",
       "blocks": [
         {
           "type": "header",
           "text": {
             "type": "plain_text",
-            "text": "${data.xmlData.head.title}",
+            "text": "${data.xmlReport.head.title}",
             "emoji": true
           }
         },
@@ -23,37 +23,37 @@ export const slackParsePayload = (data: DmdataTelegramType) => {
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*電文ヘッダ*\\n ${data.data.type}"
+              "text": "*電文ヘッダ*\\n ${data.head.type}"
             },
             {
               "type": "mrkdwn",
-              "text": "*情報名*\\n ${data.xmlData.control.title}"
+              "text": "*情報名*\\n ${data.xmlReport.control.title}"
             },
             {
               "type": "mrkdwn",
-              "text": "*運用種別*\\n ${data.xmlData.head.infoKind}"
+              "text": "*運用種別*\\n ${data.xmlReport.head.infoKind}"
             },
             {
               "type": "mrkdwn",
-              "text": "*発表形態*\\n ${data.xmlData.head.infoType}"
+              "text": "*発表形態*\\n ${data.xmlReport.head.infoType}"
             },
             {
               "type": "mrkdwn",
-              "text": "*編集官署名*\\n ${data.xmlData.control.editorialOffice}"
+              "text": "*編集官署名*\\n ${data.xmlReport.control.editorialOffice}"
             },
             {
               "type": "mrkdwn",
-              "text": "*発表官署名*\\n ${data.xmlData.control.publishingOffice}"
+              "text": "*発表官署名*\\n ${data.xmlReport.control.publishingOffice}"
             },
             {
               "type": "mrkdwn",
               "text": "*発表時刻*\\n ${convTime(
-                data.xmlData.control.dateTime
+                data.xmlReport.control.dateTime
               )}"
             },
             {
               "type": "mrkdwn",
-              "text": "*EventID*\\n ${data.xmlData.head.eventId || 'なし'}"
+              "text": "*EventID*\\n ${data.xmlReport.head.eventId || 'なし'}"
             }
           ]
         },
@@ -62,7 +62,7 @@ export const slackParsePayload = (data: DmdataTelegramType) => {
           "text": {
             "type": "mrkdwn",
             "text": "${
-              fixEscapeText(data.xmlData.head.headline, 'double') ||
+              fixEscapeText(data.xmlReport.head.headline, 'double') ||
               '特記事項なし'
             }"
           }
