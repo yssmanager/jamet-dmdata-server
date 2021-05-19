@@ -72,7 +72,7 @@ const connect = async () => {
       ws.on('message', (response: string) => {
         try {
           const data = JSON.parse(fixEscapeText(response, 'double'));
-          
+
           switch (data.type) {
             case 'start':
               sendMessageExternal(
@@ -83,8 +83,8 @@ const connect = async () => {
               // console.log(response);
               break;
             case 'data':
-              let testPath = 'dev';
-              if (data.data.test) testPath = 'test';
+              // let testPath = 'dev';
+              // if (data.head.test) testPath = 'test';
               // recieveTestTelegram(response, testPath);
               telegram(data);
 
@@ -101,6 +101,7 @@ const connect = async () => {
               console.log(response);
           }
         } catch (e) {
+          console.error(e);
           console.log(response);
         }
       });
@@ -119,7 +120,6 @@ const main = async () => {
   await fetchParamData();
   await gqlConnect();
   await connect();
-  // await testConnect(testData)
   // await testConnect()
 };
 

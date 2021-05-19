@@ -84,14 +84,14 @@ type EmbedOptionType = {
   color?: string | number
 }
 
-const makePayload = async (base: any, data?: any, info?: AddInfoType) => {
+const makePayload = async (base: any, data?: DmdataTelegramType, info?: AddInfoType) => {
   let embeds = 1;
 
   if (info === undefined) return base;
 
   const pushEmbeds = (options?: EmbedOptionType) => {
     base.embeds.push({
-      title: options?.title ?? data.xmlData.head.title!,
+      title: options?.title ?? data?.xmlReport?.head?.title!,
       color: options?.color ?? 16711680,
       fields: [],
     });

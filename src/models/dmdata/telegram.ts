@@ -100,7 +100,10 @@ export class DmdataTelegramData {
 
   constructor(data: DmdataTelegramType, option?: DmdataClassOptionType) {
     this._data = data;
-    this._option = option ?? {};
+    this._option = {
+      nosns: false,
+      ...option
+    };
   }
 
   async checkInit() {

@@ -18,6 +18,17 @@ export const discordPost = async (path: string, payload: any) => {
       // console.log(res.data);
     } catch (err) {
       console.error(err);
+      try {
+        const erm = {
+          head: {
+            type: `配信エラー ${payload.embeds[0].title!}`
+          }
+        };
+        const res2 = await axios.post(path, erm, param);
+        // console.log(res.data);
+      } catch (err2) {
+        console.error(err2);
+      }
     }
   }
 
