@@ -1,4 +1,4 @@
-import { convTime } from '../../utils';
+import { convTime, checkNullBlankString } from '../../utils';
 import { AddInfoType, DmdataTelegramType } from '../dmdata/telegram';
 import { PointListType } from '../dmdata/models/earthquake/earthquake';
 import { IntensityLvColor, IntensityLvStr } from '../../types/basic';
@@ -208,17 +208,17 @@ export const discordParsePayload = async (
           },
           {
             name: 'EventID',
-            value: data.xmlReport?.head?.eventId ?? 'なし',
+            value: checkNullBlankString(data.xmlReport?.head?.eventId, 'なし'),
             inline: true,
           },
           {
             name: 'Serial',
-            value: data.xmlReport?.head?.serial ?? 'なし',
+            value: checkNullBlankString(data.xmlReport?.head?.serial, 'なし'),
             inline: true,
           },
           {
             name: '見出し',
-            value: data.xmlReport?.head?.headline ?? '特記事項なし',
+            value: checkNullBlankString(data.xmlReport?.head?.headline, '特記事項なし'),
           },
         ],
       },

@@ -120,7 +120,7 @@ const main = async () => {
   await fetchParamData();
   await gqlConnect();
   await connect();
-  // await testConnect()
+  // await testConnect2()
 };
 
 main();
@@ -135,6 +135,19 @@ const testConnect = async () => {
   const testData = await createDmdataTelegram(str, { type: dtype });
 
   console.log(testData);
+  // await telegram(testData);
+};
+
+const testConnect2 = async () => {
+  const fp = '../test/VXSE53_RJTD_20211031211900.json';
+  const filepath = path.join(__dirname, fp);
+  const filename = path.basename(filepath, path.extname(filepath));
+  const dtype = filepath.substr(0, 6);
+  const str = fs.readFileSync(filepath, { encoding: 'utf8' });
+  // const testData = await createDmdataTelegram(str, { type: dtype });
+  const testData: DmdataTelegramType = JSON.parse(str);
+
+  console.log(testData);
   await telegram(testData);
 };
 
@@ -144,6 +157,7 @@ const testConnect = async () => {
 import fs from 'fs';
 import path from 'path';
 import { createDmdataTelegram } from './models/dmdata/fromXml';
+import { DmdataTelegramType } from 'models/dmdata/telegram';
 
 // import { convTime } from './utils'
 // function recieveTestTelegram(res: string, optionPath: string = 'dev') {

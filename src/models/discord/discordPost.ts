@@ -18,11 +18,14 @@ export const discordPost = async (path: string, payload: any) => {
       // console.log(res.data);
     } catch (err) {
       console.error(err);
+      // const e: any = err
+      // console.log(e.request)
       try {
         const erm = {
-          head: {
-            type: `配信エラー ${payload.embeds[0].title!}`
-          }
+          // head: {
+          //   type: `配信エラー ${payload.embeds[0].title!}`
+          // },
+          content: `配信エラー ${payload.embeds[0].title!}`
         };
         const res2 = await axios.post(path, erm, param);
         // console.log(res.data);

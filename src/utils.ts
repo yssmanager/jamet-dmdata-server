@@ -108,3 +108,9 @@ export const makeArray = (input: any) => {
   if (Array.isArray(input)) return input;
   else return [input];
 }
+
+export const checkNullBlankString = (str: string | undefined | null, falsy: string, truthy?: string) => {
+  if (str == null || str == "") return falsy;
+  else if (truthy != undefined) return truthy;
+  else return str;
+}
